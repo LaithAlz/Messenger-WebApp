@@ -1,0 +1,16 @@
+# Ignore node_modules in the root folder
+node_modules/
+
+# Ignore package-lock.json and package.json (assuming these are for the root project)
+package-lock.json
+package.json
+
+# Ignore build or dist directories (if applicable)
+build/
+dist/
+
+# Ignore .env files (environment variables) if present
+.env
+
+# Ignore any other files or folders specific to the root project
+# Add your custom rules here

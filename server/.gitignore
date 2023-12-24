@@ -1,0 +1,41 @@
+# Dependency directories
+node_modules/
+
+# Directory for compiled output (if applicable)
+dist/
+build/
+
+# Environment variables file (if applicable)
+.env
+
+# OS generated files
+.DS_Store
+Thumbs.db
+
+# Editor-specific files
+.vscode/
+.idea/
+
+# Dependency lock files
+yarn.lock
+package-lock.json
+
+# Runtime data
+pids
+*.pid
+*.seed
+*.pid.lock
+
+# Directory for coverage reports (if you have tests)
+coverage/
+
+# Directory for logs (if applicable)
+logs/
+
+# Configuration files (e.g., for PM2 or other process managers)
+ecosystem.config.js
+
+# Custom files to ignore (you can add your own here)
+
+# Ignore npm debug logs
+npm-debug.log*
