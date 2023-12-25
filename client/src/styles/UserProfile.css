@@ -1,0 +1,63 @@
+.user-profile {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 50px;
+    background-color: #F7F7F7;
+    min-height: 100vh;
+  }
+  
+  .profile-pic {
+    border: 3px solid #A69CAC;
+    border-radius: 50%;
+    width: 200px;
+    height: 200px;
+    object-fit: cover;
+    margin-bottom: 30px;
+  }
+  
+  .name {
+    font-size: 2.5rem;
+    color: #474973;
+    margin-bottom: 15px;
+  }
+  
+  .bio {
+    text-align: center;
+    font-size: 1.1rem;
+    color: #161B33;
+    margin-bottom: 30px;
+    max-width: 700px;
+  }
+  
+  .friend-request-btn {
+    padding: 12px 30px;
+    background-color: #474973;
+    color: #FFFFFF;
+    border: none;
+    border-radius: 30px;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.3s;
+  }
+  
+  .friend-request-btn:hover {
+    background-color: #161B33;
+    transform: translateY(-3px);
+  }
+  
+  /* Style for the chat button */
+  .chat-btn {
+    margin-top: 10px;
+    padding: 12px 30px;
+    background-color: #00AEEF;
+    color: #FFFFFF;
+    border: none;
+    border-radius: 30px;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.3s;
+  }
+  
+  .chat-btn:hover {
+    background-color: #007ABD;
+    transform: translateY(-3px);
+  }

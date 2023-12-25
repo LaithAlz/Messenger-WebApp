@@ -1,9 +1,17 @@
 import React from 'react';
 import "../styles/ChatPrev.css";
 import {useEffect, useState} from 'react';
+import InputEmoji from 'react-input-emoji';
+
 
 const ChatPrev = () => {
 
+    const [message, setMessage] = useState('');
+
+    const handleEmojiSelect = (emoji) => {
+        setMessage(prevMessage => prevMessage + emoji);
+      };
+  
 
     const messages = [
         { text: "Hey there!", sender: "user" },
@@ -37,7 +45,7 @@ const ChatPrev = () => {
 
     ];
 
-
+    
 
     useEffect(() => {
         console.log("Hello");
@@ -47,7 +55,7 @@ const ChatPrev = () => {
         }
       }, []);
 
-    return (
+      return (
         <div className="chat-interface">
             <div className="messages" id="messages">
                 {messages.map((message, index) => (
@@ -57,7 +65,13 @@ const ChatPrev = () => {
                 ))}
             </div>
             <div className="chat-input">
-                <input type="text" placeholder="Type a message..." />
+                <InputEmoji
+                    value={message}
+                    onChange={setMessage}
+                    cleanOnEnter
+                    onEnter={handleEmojiSelect}
+                    placeholder="Type a message..."
+                />
                 <button>Send</button>
             </div>
         </div>

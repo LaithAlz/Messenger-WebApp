@@ -8,7 +8,8 @@ const Navbar = () => {
         <Link to="/"><img src={Logo} alt="Logo"></img></Link>
         <Link to="/">Home</Link>
         <Link to="/friends">Friends</Link>
-        <Link to="/profile">Profile</Link>
+        <Link to="/people">People</Link>
+        <Link to="/profile">My Profile</Link>
         <input type="search" />
         <button className="search-btn">Search</button>
 

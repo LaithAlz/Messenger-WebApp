@@ -14,7 +14,7 @@
 }
 
 .navbar a {
-    color: #F1DAC4;
+    color: #FFFFFF;
     text-decoration: none;
     margin: 0 15px;
     font-size: 1.1rem;
@@ -43,7 +43,7 @@
 
 .search-btn {
     background-color: #474973;
-    color: #F1DAC4; 
+    color: #FFFFFF; 
     border: none;
     padding: 8px 15px;
     border-radius: 5px;

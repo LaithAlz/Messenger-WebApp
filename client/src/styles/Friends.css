@@ -1,0 +1,27 @@
+.friends-container {
+    padding: 20px;
+    background-color: #E0E0E0;
+    min-height: 100vh;
+}
+
+.friends-list {
+    list-style: none;
+    width: 100%;
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 0;
+}
+
+.friend {
+    background-color: #FFFFFF;
+    padding: 10px 15px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    color: #161B33;
+    cursor: pointer;
+}
+
+.friend:hover {
+    background-color: #F3F3F3;
+}
