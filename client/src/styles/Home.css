@@ -7,9 +7,19 @@ body {
 }
 
 .home-container {
-    min-height: 100vh;
+    max-height: 100vh;
     background-color: #E0E0E0;
     padding: 20px;
+    overflow-y: auto;
+}
+
+.chats{
+    list-style: none;
+    width: 100%;
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 10px;
+    padding-bottom: 30px;
 }
 
 .main-content {
@@ -19,10 +29,10 @@ body {
     color: #161B33;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     border-radius: 8px;
-    padding: 20px;
+    padding: 12px;
     margin: 20px auto;
     width: 80%;
-    max-width: 800px;
+    max-width: 600px;
     overflow-y: auto;
 }
 

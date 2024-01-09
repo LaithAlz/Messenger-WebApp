@@ -1,22 +1,23 @@
-import "../styles/People.css"
+import "../styles/People.css";
+import Person from "./Person";
 
 const People = () => {
-    const people = [{id: 1, name: "MO"}, {id:2, name: "NO"}]
+  const people = [
+    { _id: 1, name: "MO" },
+    { _id: 2, name: "NO" },
+  ];
 
-    return (
-        <div className="people-container">
-            <ul className="people-list">
-                {people.map((person) => (
-                    <li key={person.id} className="person">
-                        {person.name}
-                        <button  className="add-button">
-                            Add
-                        </button>
-                    </li>
-                ))}
-            </ul>
-        </div>
-    );
-}
- 
+  return (
+    <div className="people-container">
+      <h1 className="people">People</h1>
+
+      <ul className="people-list">
+        {people.map((person) => (
+          <Person key={person._id} person={person} />
+        ))}
+      </ul>
+    </div>
+  );
+};
+
 export default People;

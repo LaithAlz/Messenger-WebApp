@@ -57,3 +57,35 @@
     background-color: #A69CAC; 
     color: #161B33; 
 }
+
+
+.navbar .login-link, .navbar .logout-btn {
+    color: #FFFFFF;
+    background-color: #474973;
+    text-decoration: none;
+    border: none;
+    padding: 8px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s, color 0.3s;
+    font-size: 1rem;
+    margin-left: 10px;
+}
+
+.navbar .login-link:hover, .navbar .logout-btn:hover {
+    background-color: #A69CAC;
+    color: #161B33;
+}
+
+.navbar .login-link {
+    background-color: transparent;
+    padding: 0;
+    margin-left: 0;
+    text-decoration: underline;
+}
+
+.search-error {
+    color: red; 
+    margin-top: 5px;
+    margin-left: 5px;
+  }

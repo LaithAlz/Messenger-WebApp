@@ -6,45 +6,33 @@ import Friends from "./components/Friends";
 import Profile from "./components/Profile";
 import People from "./components/People";
 import UserProfile from "./components/UserProfile";
+import Login from "./components/Login";
+import Signup from "./components/Signup";
+import { ChatState } from "./context/ChatProvider";
+import Search from "./components/Search";
 
 function App() {
-
-  const chats = [{name: "Laith", lastMessage: "Hello", timestamp: "now", unread: true }]
+  const { user } = ChatState();
 
   return (
-    <BrowserRouter>
-      <div className="App">
-        <Navbar />
-        <Routes>
+    <div className="App">
+      <Navbar />
+      <Routes>
+        <Route path="/" element={user ? <Home /> : <Login />} />
+        <Route path="/friends" element={user ? <Friends /> : <Login />} />
+        <Route path="/profile" element={user ? <Profile /> : <Login />} />
+        <Route path="/people" element={user ? <People /> : <Login />} />
         <Route
-            path="/"
-            element={<Home chats={chats} />}
-          />
-        <Route
-            path="/friends"
-            element={<Friends />}
-          />
-          <Route
-            path="/profile"
-            element={<Profile />}
-          />
-          <Route
-            path="/people"
-            element={<People />}
-          />
+          path="/people/:id"
+          element={user ? <UserProfile /> : <Login />}
+        />
+        <Route path="/chat/:id" element={user ? <ChatPrev /> : <Login />} />
+        <Route path="/search" element={user ? <Search /> : <Login />} />
 
-<Route
-            path="/people/1"
-            element={<UserProfile />}
-          />
-
-          <Route
-            path="/chat/1"
-            element={<ChatPrev />}
-          />
-        </Routes>
-      </div>
-    </BrowserRouter>
+        <Route path="/login" element={<Login />} />
+        <Route path="/signup" element={<Signup />} />
+      </Routes>
+    </div>
   );
 }
 
