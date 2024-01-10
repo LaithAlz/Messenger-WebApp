@@ -4,14 +4,14 @@ const User = require("../models/userModel");
 
 const accessChat = AsyncHandler(async (req, res) => {
   const { userId } = req.body;
-  console.log("LLASKLJDDSKJFLKSAFJJLK");
+  console.log("Starting here");
 
   if (!userId) {
     console.log("UserId param not sent with request");
     return res.sendStatus(400);
   }
 
-  var isChat = await Chat.find({
+  let isChat = await Chat.find({
     $and: [
       { users: { $elemMatch: { $eq: req.user._id } } },
       { users: { $elemMatch: { $eq: userId } } },
@@ -26,7 +26,7 @@ const accessChat = AsyncHandler(async (req, res) => {
   });
 
   if (isChat.length > 0) {
-    res.send(isChat[0]);
+    return res.send(isChat[0]);
   } else {
     var chatData = {
       chatName: "sender",
@@ -39,7 +39,9 @@ const accessChat = AsyncHandler(async (req, res) => {
         "users",
         "-password"
       );
-      res.status(200).send(FullChat);
+      console.log("Printing here");
+
+      return res.status(200).send(FullChat);
     } catch (error) {
       res.send(400).send(error);
     }

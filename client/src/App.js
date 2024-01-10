@@ -28,7 +28,6 @@ function App() {
         />
         <Route path="/chat/:id" element={user ? <ChatPrev /> : <Login />} />
         <Route path="/search" element={user ? <Search /> : <Login />} />
-
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
       </Routes>

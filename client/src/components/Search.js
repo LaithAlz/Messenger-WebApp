@@ -19,6 +19,8 @@ const Search = () => {
           const config = { headers: { Authorization: `Bearer ${user.token}` } };
           const response = await axios.get(`/api/user?search=${searchQuery}`, config);
           setData(response.data);
+          console.log("REsponse");
+          console.log(response);
         } catch (error) {
           console.error("Error fetching search data:", error);
         }

@@ -1,6 +1,6 @@
 import React from "react";
 import "../styles/ChatPrev.css";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { useParams } from "react-router-dom";
 import InputEmoji from "react-input-emoji";
 import { ChatState } from "../context/ChatProvider";
@@ -8,9 +8,9 @@ import axios from "axios";
 
 const ChatPrev = () => {
   const { id } = useParams();
-  const { user, selectedChat } = ChatState();
-  const [selected, setSelected] = useState();
+  const { user } = ChatState();
   const [message, setMessage] = useState("");
+  const fetchedRef = useRef(false);
 
   const handleEmojiSelect = (emoji) => {
     setMessage((prevMessage) => prevMessage + emoji);
@@ -18,59 +18,38 @@ const ChatPrev = () => {
 
   const config = {
     headers: {
-      "Content-type": "application/json",
       Authorization: `Bearer ${user.token}`,
     },
   };
 
   useEffect(() => {
+    if (fetchedRef.current) return;
+    fetchedRef.current = true;
     const getChats = async () => {
+      console.log("Running ");
       try {
         const { data } = await axios.post("/api/chat", { userId: id }, config);
-        setSelected(data);
         console.log(data);
       } catch (error) {
-        console.log("Error fetching data:", error.response ? error.response.data : error.message);
+        console.log(
+          "Error fetching data:",
+          error.response ? error.response.data : error.message
+        );
       }
     };
     getChats();
-  }, []);
+  }, [id]);
 
-  //   useEffect(() => {
-  //     console.log("Hello");
-  //     const messageContainer = document.getElementById("messages");
-  //     if (messageContainer) {
-  //       messageContainer.scrollTop = messageContainer.scrollHeight;
-  //     }
-  //   }, []);
+  // useEffect(() => {
+  //   console.log("Hello");
+  //   const messageContainer = document.getElementById("messages");
+  //   if (messageContainer) {
+  //     messageContainer.scrollTop = messageContainer.scrollHeight;
+  //   }
+  // }, []);
 
   const messages = [
     { text: "Hey there!", sender: "user" },
-    { text: "Hello! How can I help you today?", sender: "other" },
-    { text: "Hello! How can I help you today?", sender: "other" },
-    { text: "Hello! How can I help you today?", sender: "other" },
-    { text: "Hello! How can I help you today?", sender: "other" },
-    { text: "Hello! How can I help you today?", sender: "other" },
-    { text: "Hello! How can I help you today?", sender: "other" },
-    { text: "Hello! How can I help you today?", sender: "other" },
-    { text: "Hello! How can I help you today?", sender: "other" },
-    { text: "Hello! How can I help you today?", sender: "other" },
-    { text: "Hello! How can I help you today?", sender: "other" },
-    { text: "Hello! How can I help you today?", sender: "other" },
-    { text: "Hello! How can I help you today?", sender: "other" },
-    { text: "Hello! How can I help you today?", sender: "other" },
-    { text: "Hello! How can I help you today?", sender: "other" },
-    { text: "Hello! How can I help you today?", sender: "other" },
-    { text: "Hello! How can I help you today?", sender: "other" },
-    { text: "Hello! How can I help you today?", sender: "other" },
-    { text: "Hello! How can I help you today?", sender: "other" },
-    { text: "Hello! How can I help you today?", sender: "other" },
-    { text: "Hello! How can I help you today?", sender: "other" },
-    { text: "Hello! How can I help you today?", sender: "other" },
-    { text: "Hello! How can I help you today?", sender: "other" },
-    { text: "Hello! How can I help you today?", sender: "other" },
-    { text: "Hello! How can I help you today?", sender: "other" },
-    { text: "Hello! How can I help you today?", sender: "other" },
     { text: "Hello! How can I help you today?", sender: "other" },
     { text: "Hello! How can I help you today?", sender: "user" },
   ];

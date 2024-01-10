@@ -36,7 +36,7 @@ const Navbar = () => {
         <img src={Logo} alt="Logo"></img>
       </Link>
       <Link to="/">Home</Link>
-      <Link to="/friends">Friends</Link>
+      {/* <Link to="/friends">Friends</Link> */}
       <Link to="/people">People</Link>
       <Link to="/profile">My Profile</Link>
       <input
