@@ -3,6 +3,8 @@ const io = require("socket.io");
 const connectDB = require("./db");
 const userRoutes = require("./routes/userRoutes");
 const chatRoutes = require("./routes/chatRoutes");
+const messageRoutes = require("./routes/messageRoutes");
+
 const { notFound } = require("./middleware/errorMiddleware");
 
 const PORT = process.env.PORT || 3001;
@@ -22,6 +24,8 @@ app.get("/", (req, res) => {
 
 app.use("/api/user", userRoutes);
 app.use("/api/chat", chatRoutes);
+app.use("/api/message", messageRoutes);
+
 // app.use("/api/chats", chatRoutes);
 
 app.use(notFound);
