@@ -1,9 +1,10 @@
 const express = require("express");
-const io = require("socket.io");
 const connectDB = require("./db");
 const userRoutes = require("./routes/userRoutes");
 const chatRoutes = require("./routes/chatRoutes");
 const messageRoutes = require("./routes/messageRoutes");
+const http = require('http');
+const socketio = require('socket.io');
 
 const { notFound } = require("./middleware/errorMiddleware");
 
@@ -31,6 +32,9 @@ app.use("/api/message", messageRoutes);
 app.use(notFound);
 // app.use(errorHandler)
 
-app.listen(PORT, () => {
+const server = http.createServer(app);
+const io = socketio(server);
+
+server.listen(PORT, () => {
   console.log(`Server listening on ${PORT}`);
 });

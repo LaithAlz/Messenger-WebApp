@@ -9,7 +9,6 @@ const Person = ({ person }) => {
 
   const handleClick = () => {
     setSelectedChat(person);
-
     history(`/chat/${person._id}`);
   };
   return (

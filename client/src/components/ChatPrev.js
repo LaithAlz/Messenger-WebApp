@@ -9,7 +9,7 @@ import { getSender } from "../config/ChatLogics";
 
 const ChatPrev = () => {
   const { id } = useParams();
-  const { user, selectedChat } = ChatState();
+  const { user, selectedChat, setSelectedChat } = ChatState();
   const [message, setMessage] = useState("");
   const [messages, setMessages] = useState([]);
 
@@ -21,7 +21,25 @@ const ChatPrev = () => {
   };
 
   useEffect(() => {
-    fetchMessages();
+    if (fetchedRef.current) return;
+    fetchedRef.current = true;
+    const getChat = async () => {
+      console.log("Running ");
+      try {
+        const { data } = await axios.post("/api/chat", { userId: id }, config);
+        // console.log("THIS IS GETTING THE CHAT");
+        // console.log(data);
+
+        setSelectedChat(data);
+        setChatName(getSender(user._id, data.users));
+      } catch (error) {
+        console.log(
+          "Error fetching data:",
+          error.response ? error.response.data : error.message
+        );
+      }
+    };
+    getChat();
   }, [id]);
 
   const config = {
@@ -34,40 +52,27 @@ const ChatPrev = () => {
     try {
       const { data } = await axios.post(
         "/api/message",
-        { content: message, chatId: id },
+        { content: message, chatId: selectedChat },
         config
       );
       setMessage("");
       setMessages([...messages, data]);
+      // console.log(selectedChat);
+      // console.log("THESE ARE THe MESSAGES");
+      // console.log(messages);
+      console.log("THIS IS SENDING CHAT");
       console.log(data);
     } catch (error) {
       console.log(error);
     }
   };
 
-  useEffect(() => {
-    if (fetchedRef.current) return;
-    fetchedRef.current = true;
-    const getChat = async () => {
-      console.log("Running ");
-      try {
-        const { data } = await axios.post("/api/chat", { userId: id }, config);
-        console.log(data);
-        setChatName(getSender(user._id, data.users));
-      } catch (error) {
-        console.log(
-          "Error fetching data:",
-          error.response ? error.response.data : error.message
-        );
-      }
-    };
-    getChat();
-  }, [id]);
-
   const fetchMessages = async () => {
     if (!selectedChat) {
       return;
     }
+    // console.log("FETCHING MESSAGES");
+    // console.log(selectedChat);
     try {
       const config = {
         headers: {
@@ -76,11 +81,17 @@ const ChatPrev = () => {
       };
       const { data } = await axios.get(`/api/message/${id}`, config);
       setMessages(data);
-      console.log(data);
+      // setChatName(getSender(user._id, data.users));
+      // console.log("THIS IS FETCHED MESSAGES:");
+      // console.log(data);
     } catch (error) {
       console.log(error);
     }
   };
+
+  useEffect(() => {
+    fetchMessages();
+  }, [id]);
 
   useEffect(() => {
     const messageContainer = document.getElementById("messages");
@@ -88,12 +99,6 @@ const ChatPrev = () => {
       messageContainer.scrollTop = messageContainer.scrollHeight;
     }
   }, []);
-
-  const messagesss = [
-    { text: "Hey there!", sender: "user" },
-    { text: "Hello! How can I help you today?", sender: "other" },
-    { text: "Hello! How can I help you today?", sender: "user" },
-  ];
 
   return (
     <div className="chat-interface">
