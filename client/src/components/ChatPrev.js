@@ -6,6 +6,9 @@ import InputEmoji from "react-input-emoji";
 import { ChatState } from "../context/ChatProvider";
 import axios from "axios";
 import { getSender } from "../config/ChatLogics";
+import socketIO from 'socket.io-client'
+
+const socket = socketIO.connect("http://localhost:3001")
 
 const ChatPrev = () => {
   const { id } = useParams();
@@ -20,6 +23,21 @@ const ChatPrev = () => {
     setMessage((prevMessage) => prevMessage + emoji);
   };
 
+
+  useEffect(() => {
+
+    const messageContainer = document.getElementById("messages");
+    if (messageContainer) {
+      messageContainer.scrollTop = messageContainer.scrollHeight;
+    }
+
+
+    socket.on('messageResponse', (data) => {
+      setMessages([...messages, data])
+    })
+  }, [messages, socket])
+
+
   useEffect(() => {
     if (fetchedRef.current) return;
     fetchedRef.current = true;
@@ -31,7 +49,7 @@ const ChatPrev = () => {
         // console.log(data);
 
         setSelectedChat(data);
-        setChatName(getSender(user._id, data.users));
+        setChatName(getSender(user, data.users));
       } catch (error) {
         console.log(
           "Error fetching data:",
@@ -56,12 +74,16 @@ const ChatPrev = () => {
         config
       );
       setMessage("");
-      setMessages([...messages, data]);
+      // setMessages([...messages, data]);
       // console.log(selectedChat);
       // console.log("THESE ARE THe MESSAGES");
       // console.log(messages);
       console.log("THIS IS SENDING CHAT");
       console.log(data);
+
+      socket.emit("message", data)
+
+
     } catch (error) {
       console.log(error);
     }
@@ -71,15 +93,16 @@ const ChatPrev = () => {
     if (!selectedChat) {
       return;
     }
-    // console.log("FETCHING MESSAGES");
-    // console.log(selectedChat);
+    console.log("FETCHING MESSAGES");
+    console.log(selectedChat);
     try {
       const config = {
         headers: {
           Authorization: `Bearer ${user.token}`,
         },
       };
-      const { data } = await axios.get(`/api/message/${id}`, config);
+      const { data } = await axios.get(`/api/message/${selectedChat._id}`, config);
+      console.log(data);
       setMessages(data);
       // setChatName(getSender(user._id, data.users));
       // console.log("THIS IS FETCHED MESSAGES:");
@@ -91,7 +114,7 @@ const ChatPrev = () => {
 
   useEffect(() => {
     fetchMessages();
-  }, [id]);
+  }, [selectedChat]);
 
   useEffect(() => {
     const messageContainer = document.getElementById("messages");

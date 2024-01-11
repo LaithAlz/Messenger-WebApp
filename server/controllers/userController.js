@@ -64,4 +64,30 @@ const allUsers = asyncHandler(async (req, res) => {
   res.send(users);
 });
 
-module.exports = { registerUser, authUser, allUsers };
+const changePassword = asyncHandler(async (req,res) => {
+  const {userId, oldPassword, newPassword} = req.body
+  if(!oldPassword || !newPassword){
+    res.status(400)
+    throw new Error("Please provide old and new password")
+  }
+
+  const user = await User.findById(userId)
+  if(!user){
+    res.status(404)
+    throw new Error("user not found")
+  }
+
+  if(!(await user.matchPassword(oldPassword))){
+    res.status(401)
+    throw new Error("Incorrect old password")
+  }
+
+  user.password = newPassword;
+  await user.save();
+
+  res.status(200).json({ message: "Password changed successfully" });
+
+
+})
+
+module.exports = { registerUser, authUser, allUsers, changePassword };

@@ -41,6 +41,7 @@ const accessChat = AsyncHandler(async (req, res) => {
         "-password"
       );
       console.log("Printing here");
+      console.log(FullChat);
 
       return res.status(200).send(FullChat);
     } catch (error) {
@@ -50,6 +51,7 @@ const accessChat = AsyncHandler(async (req, res) => {
 });
 
 const fetchChat = AsyncHandler(async (req, res) => {
+    console.log("sike we here");
   try {
     Chat.find({ users: { $elemMatch: { $eq: req.user._id } } })
       .populate("users", "-password")
@@ -60,6 +62,7 @@ const fetchChat = AsyncHandler(async (req, res) => {
           path: "lastMessage.sender",
           select: "name email",
         });
+        console.log(results);
         res.status(200).send(results);
       });
   } catch (error) {}

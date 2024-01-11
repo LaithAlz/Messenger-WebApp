@@ -52,7 +52,7 @@ const Home = () => {
                 handleClick(chat);
               }}
             >
-              {getSender(user._id, chat.users)}
+              {getSender(user, chat.users)}
             </div>
             {/* <div className="chat-preview">{chat.lastMessage}</div> */}
             {/* <div className="chat-timestamp">{chat.timestamp}</div> */}
