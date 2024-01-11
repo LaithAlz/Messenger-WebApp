@@ -39,7 +39,7 @@ Follow these steps to get your development environment running:
 
 ```bash
 # Clone the repository
-git clone https://github.com/yourusername/real-time-messenger-app.git
+git clone https://github.com/LaithAlz/Messenger-WebApp.git
 
 # Navigate to the cloned repository
 cd real-time-messenger-app
